@@ -1,8 +1,8 @@
-RSpec.describe "POST /api/articles", type: :request do
+RSpec.describe "POST /api/comments", type: :request do
   let!(:articles) { 3.times { create(:article) } }
   describe "successfully" do
     before do
-      post "/api/articles"
+      post "/api/comments"
     end
 
     it "returns a 200 response" do
