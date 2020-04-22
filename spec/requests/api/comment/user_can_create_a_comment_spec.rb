@@ -1,5 +1,6 @@
 RSpec.describe "POST /api/comments", type: :request do
   let!(:article) { create(:article) }
+  let!(:user) { create(:user) }
 
   describe "successfully" do
     before do
@@ -7,7 +8,8 @@ RSpec.describe "POST /api/comments", type: :request do
         params: {
           comment: {
             body: 'Commenting',
-            article_id: article.id
+            article_id: article.id,
+            user_id: user.id
           } 
         } 
     end
