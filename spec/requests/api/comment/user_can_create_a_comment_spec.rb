@@ -1,6 +1,11 @@
 RSpec.describe "POST /api/comments", type: :request do
   let!(:article) { create(:article) }
+  
   let!(:user) { create(:user) }
+  let(:user_credentials) { user.create_new_auth_token }
+  let(:user_headers) do
+    { HTTP_ACCEPT: 'application/json' }.merge!(user_credentials)
+  end
 
   describe "successfully" do
     before do
@@ -11,7 +16,8 @@ RSpec.describe "POST /api/comments", type: :request do
             article_id: article.id,
             user_id: user.id
           } 
-        } 
+        },
+        headers: user_headers
     end
 
     it "returns a 200 response" do
@@ -29,9 +35,11 @@ RSpec.describe "POST /api/comments", type: :request do
         params: {
           comment: {
             body: '',
-            article_id: article.id
+            article_id: article.id,
+            user_id: user.id
           } 
-        } 
+        },
+        headers: user_headers 
     end
 
     it "returns a 422 response" do
