@@ -18,7 +18,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def verify_existance_of_article_and_user
-    if comment_params['article_id'].empty? || comment_params['user_id'].empty?
+    if comment_params['article_id'].nil? || comment_params['user_id'].nil?
       render json: { error: "Internal error." }, status: 500
     end
   end
